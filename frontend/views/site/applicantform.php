@@ -1,7 +1,7 @@
 <?php
 
+use backend\models\Company;
 use backend\models\Job;
-use common\models\User;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -10,17 +10,15 @@ use yii\widgets\ActiveForm;
 /* @var $model frontend\models\Applicant */
 /* @var $form ActiveForm */
 $job = ArrayHelper::map(Job::find()->all(),'id','position');
-$user = ArrayHelper::map(User::find()->all(),'id','username');
+$company = ArrayHelper::map(Company::find()->all(),'id','name');
 ?>
 <div class="site-applicantform">
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'user_id')->dropDownList($user)?>
-        <?= $form->field($model, 'job_id')->dropDownList($job) ?>
-        <?= $form->field($model, 'company_id') ?>
-        <?= $form->field($model, 'created_at') ?>
         <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'job_id')->dropDownList($job) ?>
+        <?= $form->field($model, 'company_id')->dropDownList($company) ?>
     
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>

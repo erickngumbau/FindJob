@@ -17,6 +17,7 @@ use Yii;
  * @property string|null $employees_required
  * @property string|null $country
  * @property string|null $city
+ * @property string|null $image
  *
  * @property Applicant[] $applicants
  * @property Job $job
@@ -38,11 +39,12 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','job_id','user_id', 'salary', 'employees_required', 'country', 'city'], 'required'],
+            [['name','job_id','user_id', 'salary', 'employees_required', 'country', 'city', 'image'], 'required'],
             [['job_id', 'user_id'], 'integer'],
-            [['name', 'salary', 'employees_required', 'country', 'city'], 'string', 'max' => 200],
+            [['name', 'salary', 'employees_required', 'country', 'city', 'image'], 'string', 'max' => 200],
             [['job_id'], 'exist', 'skipOnError' => true, 'targetClass' => Job::className(), 'targetAttribute' => ['job_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['image'],'file','extensions'=>'jpg,png,gif','skipOnEmpty'=>false],
         ];
     }
 
@@ -60,6 +62,7 @@ class Company extends \yii\db\ActiveRecord
             'employees_required' => 'Employees Required',
             'country' => 'Country',
             'city' => 'City',
+            'image' => 'Image',
         ];
     }
 

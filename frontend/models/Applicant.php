@@ -4,14 +4,12 @@ namespace frontend\models;
 
 use backend\models\Company;
 use backend\models\Job;
-use common\models\User;
 use Yii;
 
 /**
  * This is the model class for table "applicant".
  *
  * @property int $id
- * @property int|null $user_id
  * @property string|null $name
  * @property int|null $job_id
  * @property int|null $company_id
@@ -19,7 +17,6 @@ use Yii;
  *
  * @property Job $job
  * @property Company $company
- * @property User $user
  */
 class Applicant extends \yii\db\ActiveRecord
 {
@@ -37,12 +34,12 @@ class Applicant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'job_id', 'company_id'], 'integer'],
+            [['name','job_id', 'company_id'], 'required'],
+            [['job_id', 'company_id'], 'integer'],
             [['created_at'], 'safe'],
             [['name'], 'string', 'max' => 200],
             [['job_id'], 'exist', 'skipOnError' => true, 'targetClass' => Job::className(), 'targetAttribute' => ['job_id' => 'id']],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -53,10 +50,9 @@ class Applicant extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'name' => 'Name',
-            'job_id' => 'Job ID',
-            'company_id' => 'Company ID',
+            'name' => 'Applicant Name',
+            'job_id' => 'Job',
+            'company_id' => 'Company',
             'created_at' => 'Created At',
         ];
     }
@@ -79,15 +75,5 @@ class Applicant extends \yii\db\ActiveRecord
     public function getCompany()
     {
         return $this->hasOne(Company::className(), ['id' => 'company_id']);
-    }
-
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

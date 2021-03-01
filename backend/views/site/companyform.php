@@ -14,15 +14,17 @@ $user = ArrayHelper::map(User::find()->all(),'id','username');
 ?>
 <div class="site-companyform">
 
-    <?php $form = ActiveForm::begin(); ?>
-    
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+
         <?= $form->field($model, 'name') ?>
         <?= $form->field($model, 'job_id')->dropDownList($job) ?>
-        <?= $form->field($model, 'user_id')->dropDownList($user)?>
+        <?= $form->field($model, 'user_id')->dropDownList($user) ?>
         <?= $form->field($model, 'salary') ?>
         <?= $form->field($model, 'employees_required') ?>
         <?= $form->field($model, 'country') ?>
         <?= $form->field($model, 'city') ?>
+        <?= $form->field($model, 'image')->fileInput() ?>
+        
     
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>

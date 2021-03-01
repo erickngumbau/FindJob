@@ -1,19 +1,13 @@
 <?php
 
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
 ?>
 <div class="shadow-sm p-3 mb-5 bg-body rounded">
-<style>
 
-hr.new2 {
-  border-top: 1px solid #689;
-}
-
-</style>
-
-    <span style="font-size: 40px;color:#689;">JOBS</span>
+    <a href="<?= Url::to(['/job'])?>"  style="text-decoration:none;margin-left: 70px; font-size: 40px;color:#689;">JOBS</a>
     <hr class="new2">
     <?php
     echo ListView::widget([

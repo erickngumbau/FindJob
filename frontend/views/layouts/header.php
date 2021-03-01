@@ -16,13 +16,13 @@ use yii\helpers\Url;
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Jobs</a>
+          <a class="nav-link" href="<?= Url::to(['/job'])?>">Jobs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Companies</a>
+          <a class="nav-link" href="<?= Url::to(['/company'])?>">Companies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Salaries</a>
+          <a class="nav-link" href="<?= Url::to(['/salary'])?>">Salaries</a>
         </li>
       </ul>
     </div>

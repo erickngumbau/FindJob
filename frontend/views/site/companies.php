@@ -1,5 +1,10 @@
+<?php
+
+use yii\helpers\Url;
+?>
 <div class="shadow-sm p-3 mb-5 bg-body rounded">
-    <span style="font-size: 40px;color:#689;">Companies</span>
+    <a href="<?= Url::to(['/company'])?>"  style="text-decoration:none;margin-left: 70px; font-size: 40px;color:#689;">Companies</a>
+
     <hr class="new2">
     <?php
 

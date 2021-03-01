@@ -1,22 +1,37 @@
+<?php
+
+use backend\models\Company;
+use frontend\models\Applicant;
+
+// $speccompanyId = Yii::$app->db->createCommand('SELECT id FROM company')
+//              ->queryColumn();
+
+// $applicantsbyCompany = Applicant::find()
+//     ->where(['company_id' => Yii::$app->user->identity->id])
+//     ->count();
+
+
+?>
+    
     <div class="container" style="margin-top: 5px;">
         <div class="row">
             <div class="col-sm-3 wrap p-2 shadow p-3 mb-5 bg-body rounded">
                 <p><i class="fa fa-tachometer fa-3x" aria-hidden="true"></i>
                     <span style="color:#c55;font-size:30px;margin-left: 5px;">Total Jobs</span>
                 </p>
-                <p style="font-size:20px;margin-left: 70px;"><?=$jobcount?></p>
+                <p style="font-size:20px;margin-left: 70px;"><?=$job->find()->count()?></p>
             </div>
             <div class="col-sm-3 wrap p-2 shadow p-3 mb-5 bg-body rounded">
                 <p><i class="fa fa-tachometer fa-3x" aria-hidden="true"></i>
                     <span style="color:#c55;font-size:30px;margin-left: 5px;">Companies</span>
                 </p>
-                <p style="font-size:20px;margin-left: 70px;"><?=$companiescount?></p>
+                <p style="font-size:20px;margin-left: 70px;"><?=$company->find()->count()?></p>
             </div>
             <div class="col-sm-3 wrap p-2 shadow p-3 mb-5 bg-body rounded">
                 <p><i class="fa fa-tachometer fa-3x" aria-hidden="true"></i>
                     <span style="color:#c55;font-size:30px;margin-left: 5px;">Applicants</span>
                 </p>
-                <p style="font-size:20px;margin-left: 70px;"><?=$applicantscount?></p>
+                <p style="font-size:20px;margin-left: 70px;"><?=$applicant->find()->count()?></p>
             </div>
         </div>
     </div>

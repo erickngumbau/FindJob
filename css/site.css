@@ -161,3 +161,7 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
   height: 10%;
   width: 10%;
 }
+
+.hr.new2 {
+    border-top: 1px solid #689;
+  }

@@ -1,14 +1,28 @@
 <?php
-/* @var $this yii\web\View */
+
+use yii\widgets\ListView;
+
 ?>
-<h1>salary/index</h1>
+<div style="margin-left: 70px; font-size: 40px;color:#689;">Salary Ranges</div>
+<hr class="new2">
+<?php
+echo ListView::widget([
+    'dataProvider' => $provider,
+    'itemView' => '/site/_salaries',
+    'layout'=>'<div class="d-flex flex-wrap">{items}</div>', 
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
 
+    // options for wrapper
+    'options' => [
+        'tag' => 'div',
+        'class' => 'col',
+    ],
 
-/** 
-redirect to the comapnies detailed once clicked
- */
+    // options for each item
+    'itemOptions' => [
+        'tag' => 'div',
+        'class' => 'col-sm-3 col-md-3 col-lg-3 ',
+    ],
+]);
+
+?>

@@ -9,6 +9,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\Applicant;
+use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -60,7 +62,26 @@ class SiteController extends Controller
     {
         $model = new \backend\models\Company();
     
-        if ($model->load(Yii::$app->request->post()) && $model->save()){
+        if ($model->load(Yii::$app->request->post())){
+
+            $imageFile = UploadedFile::getInstance($model, 'image');
+            if (isset($imageFile->size)) {
+
+                // $imageFile->saveAs('uploads/' . $imageFile->baseName . '.' . $imageFile->extension);
+               
+                if(!file_exists((Url::to('@webfront/myassets/realimages/'))))
+                {
+                    mkdir(Url::to('@webfront/myassets/realimages/'),0777,true);
+                }
+
+                $imageName = Url::to('@webfront/myassets/realimages/').'/'.$imageFile->baseName.'.'.$imageFile->extension;
+                $imageFile->saveAs($imageName);
+          
+            }
+           
+                 $model->image= $imageFile->baseName . '.' . $imageFile->extension;
+                 $model->save(false);
+
                 Yii::$app->session->setFlash('success', 'Company data saved.');
                 return $this->refresh();
             
@@ -78,16 +99,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $jobcount = Job::find()
-            ->count();
+        $job = new Job();
+        $company = new Company();
+        $applicant = new Applicant();
 
-        $companiescount = Company::find()
-            ->count();
 
-       $applicantscount = Applicant::find()
-            ->count();
+    //     $jobcount = Job::find()
+    //         ->count();
 
-        return $this->render('index',['jobcount'=>$jobcount,'companiescount'=>$companiescount,'applicantscount'=>$applicantscount]);
+    //     $companiescount = Company::find()
+    //         ->count();
+
+    //    $applicantscount = Applicant::find()
+    //         ->count();
+        
+     
+
+        return $this->render('index',['job'=>$job,'company'=>$company,'applicant'=>$applicant]);
     }
 
     /**

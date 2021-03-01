@@ -15,12 +15,15 @@ use yii\helpers\Url;
     <div class="col-sm-9">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
 
+      <?php if(Yii::$app->user->can('admin') || Yii::$app->user->can('company')){?>
         <li class="nav-item">
           <a style="font-weight: bold;" class="nav-link fnthover" href="<?= Url::to(['/job/create']) ?>">Add Jobs</a>
         </li>
         <li style="font-weight: bold;" class="nav-item">
           <a class="nav-link fnthover" href="<?= Url::to(['/site/companyform']) ?>">Add Companies</a>
         </li>
+
+        <?php } ?>
       </ul>
     </div>
 

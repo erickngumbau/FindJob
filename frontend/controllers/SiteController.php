@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use backend\models\Company;
@@ -81,7 +82,7 @@ class SiteController extends Controller
         $provider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' =>4,
+                'pageSize' => 4,
             ],
             'sort' => [
                 'defaultOrder' => [
@@ -95,7 +96,7 @@ class SiteController extends Controller
         $providercompanies = new ActiveDataProvider([
             'query' => $providercompaniesquery,
             'pagination' => [
-                'pageSize' =>4,
+                'pageSize' => 4,
             ],
             'sort' => [
                 'defaultOrder' => [
@@ -104,7 +105,7 @@ class SiteController extends Controller
             ],
         ]);
 
-        return $this->render('index',['provider'=>$provider, 'providercompanies'=>$providercompanies]);
+        return $this->render('index', ['provider' => $provider, 'providercompanies' => $providercompanies]);
     }
 
 
@@ -300,19 +301,17 @@ class SiteController extends Controller
     }
 
     public function actionApplicantform()
-{
-    $model = new \frontend\models\Applicant();
+    {
+        $model = new \frontend\models\Applicant();
 
-    if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        if ($model->validate()) {
-            // form inputs are valid, do something here
-            Yii::$app->session->setFlash('success', 'Company data saved.');
-                return $this->refresh();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                // return $this->refresh();
+             return $this->redirect(['site/index']);
+
         }
-    }
 
-    return $this->render('applicantform', [
-        'model' => $model,
-    ]);
-}
+        return $this->renderAjax('applicantform', [
+            'model' => $model,
+        ]);
+    }
 }
